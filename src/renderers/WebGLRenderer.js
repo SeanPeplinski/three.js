@@ -161,6 +161,7 @@ function WebGLRenderer( parameters = {} ) {
 	let _pixelRatio = 1;
 	let _opaqueSort = null;
 	let _transparentSort = null;
+	let _sortOverride = null;
 
 	const _viewport = new Vector4( 0, 0, _width, _height );
 	const _scissor = new Vector4( 0, 0, _width, _height );
@@ -509,6 +510,12 @@ function WebGLRenderer( parameters = {} ) {
 	this.setTransparentSort = function ( method ) {
 
 		_transparentSort = method;
+
+	};
+
+	this.setSortOverride = function ( method ) {
+
+		_sortOverride = method;
 
 	};
 
@@ -995,7 +1002,7 @@ function WebGLRenderer( parameters = {} ) {
 
 		if ( _this.sortObjects === true ) {
 
-			currentRenderList.sort( _opaqueSort, _transparentSort );
+			currentRenderList.sort( _opaqueSort, _transparentSort, _sortOverride );
 
 		}
 
